@@ -33,4 +33,15 @@ public class UserController {
 		return userService.delete(ids);
 	}
 	
+	@RequestMapping("/add")
+	@ResponseBody
+	public ServerResponse add(User user) {
+		return userService.add(user);
+	}
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public ServerResponse update(User user) {
+		return userService.update(user);
+	}
 }
