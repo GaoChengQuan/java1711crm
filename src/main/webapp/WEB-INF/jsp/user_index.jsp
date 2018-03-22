@@ -26,6 +26,15 @@
 				]],
 			});
 		});
+		
+		/* 搜索 */
+		function doSearch(){
+			$('#datagrid').datagrid('load', {    
+			    name : $("#s_name").val(),    
+			    email : $("#s_email").val(),   
+			    roleName : $("#s_roleName").val() 
+			});  
+		}
 	</script>
 </head>
 <body>
@@ -47,7 +56,7 @@
 					<option value="客户经理">客户经理</option>
 					<option value="高管">高管</option>
 				</select>
-			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
+			<a href="javascript:doSearch()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
 		</div>
 	</div>
 	<!-- toolbar结束 -->

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.situ.crm.common.DataGrideResult;
+import com.situ.crm.entity.User;
 import com.situ.crm.service.IUserService;
 
 @Controller
@@ -21,8 +22,8 @@ public class UserController {
 	
 	@RequestMapping("/pageList")
 	@ResponseBody
-	public DataGrideResult pageList() {
-		return userService.pageList();
+	public DataGrideResult pageList(Integer page, Integer rows, User user) {
+		return userService.pageList(page, rows, user);
 	}
 	
 	
