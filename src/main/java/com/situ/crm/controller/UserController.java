@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.situ.crm.common.DataGrideResult;
+import com.situ.crm.common.ServerResponse;
 import com.situ.crm.entity.User;
 import com.situ.crm.service.IUserService;
 
@@ -26,5 +27,10 @@ public class UserController {
 		return userService.pageList(page, rows, user);
 	}
 	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public ServerResponse delete(String ids) {
+		return userService.delete(ids);
+	}
 	
 }
