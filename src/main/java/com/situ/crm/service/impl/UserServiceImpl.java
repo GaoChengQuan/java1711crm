@@ -32,10 +32,17 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public ServerResponse delete(String ids) {
 		String[] idsArray = ids.split(",");//[1,2,3]
-		for (String id : idsArray) {
+		/*for (String id : idsArray) {
 			userMapper.deleteByPrimaryKey(Integer.parseInt(id));
 		}
-		return ServerResponse.createSUCCESS("删除成功");
+		return ServerResponse.createSUCCESS("删除成功");*/
+		
+		// delete from user where id in (1,2,3);
+		int count = userMapper.deleteAll(idsArray);
+		if (count == idsArray.length) {
+			return ServerResponse.createSUCCESS("删除成功");
+		}
+		return ServerResponse.createERROR("删除失败");
 	}
 
 }

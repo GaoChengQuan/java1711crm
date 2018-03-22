@@ -18,4 +18,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
 	List<User> pageList(User user);
+
+	int deleteAll(String[] idsArray);
 }
