@@ -116,4 +116,23 @@
       remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="pageList" parameterType="product" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from product
+    <where>
+    	<if test="name != null and name != '' ">
+    		and name like concat("%", #{name}, "%")
+    	</if>
+    </where>
+  </select>
+  
+  <delete id="deleteAll">
+  	delete from product
+  	where id in
+  	<foreach collection="array" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </delete>
 </mapper>
