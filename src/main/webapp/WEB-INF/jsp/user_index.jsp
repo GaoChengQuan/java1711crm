@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 	<script type="text/javascript">
 		$(function() {
+			/* 渲染table */
 			$("#datagrid").datagrid({
 				url : "${ctx}/user/pageList.action",
 				method : "get",
@@ -26,7 +27,7 @@
 				]],
 			});
 			
-			/* 初始化添加dialog */
+			/* 初始化添加、修改的dialog */
 			$("#dialog").dialog({
 				closed : true,
 			    buttons : [
@@ -116,7 +117,7 @@
 						$.messager.alert("系统提示", "请选择用户角色");
 						return false;
 					}
-					return true;
+					return $(this).form('validate');//返回false终止表单提交
 				},
 				success : function(data) {
 					// change the JSON string to javascript object
@@ -181,7 +182,7 @@
                   <td>用户角色：</td>
                   <td>
                       <select class="easyui-combobox" id="roleName" panelHeight="auto" editable="false" name="roleName" style="width:160">
-                          <option></option>
+                          <option value="">请选择...</option>
                           <option value="系统管理员">系统管理员</option>
                           <option value="销售主管">销售主管</option>
                           <option value="客户经理">客户经理</option>
@@ -193,14 +194,5 @@
        </form>
     </div>
     <!-- 添加和修改的dialog 结束 -->
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </body>
 </html>
