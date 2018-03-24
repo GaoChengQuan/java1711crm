@@ -198,4 +198,36 @@
       dev_result = #{devResult,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+   <select id="pageList" parameterType="saleChance" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from sale_chance
+    <where>
+    	<if test="chanceSource != null and chanceSource != '' ">
+    		and chance_source like concat("%", #{chanceSource}, "%")
+    	</if>
+    	<if test="customerName != null and customerName != '' ">
+    		and customer_name like concat("%", #{customerName}, "%")
+    	</if>
+    	<if test="status != null">
+    		and status = #{status}
+    	</if>
+    </where>
+  </select>
+  
+  <delete id="deleteAll">
+  	delete from sale_chance
+  	where id in
+  	<foreach collection="array" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </delete>
+  
+  <update id="updateDevResult">
+  	update sale_chance
+  	set dev_result=#{devResult}
+  	where id=#{id}
+  </update>
+  
 </mapper>
