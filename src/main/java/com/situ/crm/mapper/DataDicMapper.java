@@ -1,5 +1,8 @@
 package com.situ.crm.mapper;
 
+import java.util.List;
+
+import com.situ.crm.entity.DataDic;
 import com.situ.crm.entity.DataDic;
 
 public interface DataDicMapper {
@@ -14,4 +17,8 @@ public interface DataDicMapper {
     int updateByPrimaryKeySelective(DataDic record);
 
     int updateByPrimaryKey(DataDic record);
+    
+    List<DataDic> pageList(DataDic dataDic);
+
+	int deleteAll(String[] idsArray);
 }

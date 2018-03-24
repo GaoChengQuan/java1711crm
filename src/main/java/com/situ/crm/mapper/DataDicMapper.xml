@@ -70,4 +70,26 @@
       data_dic_value = #{dataDicValue,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="pageList" parameterType="dataDic" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from data_dic
+    <where>
+    	<if test="dataDicName != null and dataDicName != '' ">
+    		and data_dic_name like concat("%", #{dataDicName}, "%")
+    	</if>
+    	<if test="dataDicValue != null and dataDicValue != '' ">
+    		and data_dic_value like concat("%", #{dataDicValue}, "%")
+    	</if>
+    </where>
+  </select>
+  
+  <delete id="deleteAll">
+  	delete from data_dic
+  	where id in
+  	<foreach collection="array" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </delete>
 </mapper>
