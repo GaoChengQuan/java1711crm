@@ -63,4 +63,9 @@ public class DataDicServiceImpl implements IDataDicService{
 		return ServerResponse.createERROR("更新失败");
 	}
 
+	@Override
+	public List<DataDic> selectDataDicName() {
+		return dataDicMapper.selectDataDicName();
+	}
+
 }

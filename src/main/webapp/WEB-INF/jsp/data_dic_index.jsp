@@ -49,9 +49,8 @@
 		/* 搜索 */
 		function doSearch(){
 			$('#datagrid').datagrid('load', {    
-			    name : $("#s_name").val(),    
-			    email : $("#s_email").val(),   
-			    roleName : $("#s_roleName").val() 
+			    dataDicName : $("#s_dataDicName").val(),    
+			    dataDicValue : $("#s_dataDicValue").val()    
 			});  
 		}
 		
@@ -138,16 +137,13 @@
 		<a href="javascript:openUpdateDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
 		<a href="javascript:doDelete()" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
 		<div>
-			用户名：<input type="text" id="s_name"/>
-			邮箱：<input type="text" id="s_email"/>
-			角色：<select id="s_roleName" class="easyui-combobox" 
-					editable="false" panelHeight="auto">
-					<option value="">请选择...</option>
-					<option value="系统管理员">系统管理员</option>
-					<option value="销售主管">销售主管</option>
-					<option value="客户经理">客户经理</option>
-					<option value="高管">高管</option>
-				</select>
+			数据字典名：<input id="s_dataDicName" class="easyui-combobox" name="dept"   
+    						data-options="
+    							url:'${ctx}/dataDic/selectDataDicName.action',
+    							valueField:'dataDicName',
+    							textField:'dataDicName',
+    							panelHeight:'auto' " />  
+			数据字典值：<input type="text" id="s_dataDicValue"/>
 			<a href="javascript:doSearch()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">搜索</a>
 		</div>
 	</div>

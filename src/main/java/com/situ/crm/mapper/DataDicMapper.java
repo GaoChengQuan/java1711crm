@@ -21,4 +21,6 @@ public interface DataDicMapper {
     List<DataDic> pageList(DataDic dataDic);
 
 	int deleteAll(String[] idsArray);
+
+	List<DataDic> selectDataDicName();
 }
