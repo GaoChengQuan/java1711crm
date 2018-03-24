@@ -41,7 +41,7 @@
 				    	 }
 				     }},    
 				     {field:'a',title:'操作',width:80,align:'center',formatter:function(value,row,index){
-				    	 if(row.devResult==3||row.devResult==4){
+				    	 if(row.devResult==2||row.devResult==3){
 				    		 return "<a href='javascript:openCusDevPlanTab("+row.id+")'>查看详细信息</a>";
 				    	 }else{
 				    		 return "<a href='javascript:openCusDevPlanInfoTab("+row.id+")'>开发</a>";
