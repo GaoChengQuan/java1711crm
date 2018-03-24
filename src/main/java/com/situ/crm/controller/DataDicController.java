@@ -48,9 +48,15 @@ public class DataDicController {
 		return dataDicService.update(dataDic);
 	}
 	
+	@RequestMapping("/selectDataDicName1")
+	@ResponseBody
+	public List<DataDic> selectDataDicName1() {
+		return dataDicService.selectDataDicName1();
+	}
+	
 	@RequestMapping("/selectDataDicName")
 	@ResponseBody
-	public List<DataDic> selectDataDicName() {
+	public List<Map<String, String>> selectDataDicName() {
 		return dataDicService.selectDataDicName();
 	}
 }

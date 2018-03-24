@@ -1,6 +1,9 @@
 package com.situ.crm.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,8 +67,22 @@ public class DataDicServiceImpl implements IDataDicService{
 	}
 
 	@Override
-	public List<DataDic> selectDataDicName() {
-		return dataDicMapper.selectDataDicName();
+	public List<DataDic> selectDataDicName1() {
+		return dataDicMapper.selectDataDicName1();
 	}
+
+	@Override
+	public List<Map<String, String>> selectDataDicName() {
+		List<String> dataDicNames = dataDicMapper.selectDataDicName();
+		List<Map<String, String>> list = new ArrayList<>();
+		for (String dataDicName : dataDicNames) {
+			Map<String, String> map = new HashMap<>();
+			map.put("dataDicName", dataDicName);
+			list.add(map);
+		}
+		return list;
+	}
+	
+	
 
 }

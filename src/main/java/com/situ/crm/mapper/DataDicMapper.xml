@@ -98,7 +98,12 @@
   	</foreach>
   </delete>
   
-  <select id="selectDataDicName" resultMap="ResultMap">
+  <select id="selectDataDicName1" resultMap="ResultMap">
+  	select distinct data_dic_name
+  	from data_dic
+  </select>
+  
+  <select id="selectDataDicName" resultType="string">
   	select distinct data_dic_name
   	from data_dic
   </select>
