@@ -45,7 +45,15 @@
 			     {field:'planDate',title:'日期',width:100,align:'center',editor:{type:'datebox',options:{required:true}}},    
 			     {field:'planItem',title:'计划内容',width:80,align:'center',editor:{type:'validatebox',options:{required:true}}},    
 			     {field:'exeAffect',title:'执行效果',width:80,align:'center',editor:{type:'validatebox',options:{required:true}}}  
-			]]
+			]],
+			onSuccess : function() {
+				$('#datagrid').edatagrid('reload');
+				console.log("onSuccess");
+			},
+			onDestroy : function() {
+				$('#datagrid').edatagrid('reload');
+				console.log("onDestroy");
+			}
 		});
 	});
 	
@@ -123,7 +131,7 @@
 	 <br/>
 	 
 	<!-- 客户开发计划项table -->
-	<table id="datagrid" style="width:700px;height:250px"></table>
+	<table id="datagrid" style="width:700px;height:250px" idField="id"></table>
 	
 	<!-- toolbar 开始 -->
 	 <div id="toolbar">
@@ -131,7 +139,7 @@
 		 	<a href="javascript:$('#datagrid').edatagrid('addRow')" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加计划</a>
 		 	<a href="javascript:$('#datagrid').edatagrid('destroyRow')" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除计划</a>
 		 	<a href="javascript:$('#datagrid').edatagrid('cancelRow')" class="easyui-linkbutton" iconCls="icon-undo" plain="true">撤销行</a>
-		 	<a href="javascript:$('#datagrid').edatagrid('saveRow');$('#datagrid').edatagrid('reload')" class="easyui-linkbutton" iconCls="icon-save" plain="true">保存计划</a>
+		 	<a href="javascript:$('#datagrid').edatagrid('saveRow')" class="easyui-linkbutton" iconCls="icon-save" plain="true">保存计划</a>
 		 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-kfcg" plain="true" onclick="updateSaleChanceDevResult(2)">开发成功</a>
 		 	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-zzkf" plain="true" onclick="updateSaleChanceDevResult(3)">终止开发</a>
 	 	</c:if>
