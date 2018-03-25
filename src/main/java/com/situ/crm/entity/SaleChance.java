@@ -24,12 +24,12 @@ public class SaleChance implements Serializable {
 
     private String createMan;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" ,timezone="GMT+8")
     private Date createTime;
 
     private String assignMan;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" ,timezone="GMT+8")
     private Date assignTime;
 
     private Integer status;

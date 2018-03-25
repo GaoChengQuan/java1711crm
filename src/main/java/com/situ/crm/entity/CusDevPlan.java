@@ -12,7 +12,7 @@ public class CusDevPlan implements Serializable {
 
     private String planItem;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd" ,timezone="GMT+8")
     private Date planDate;
 
     private String exeAffect;
