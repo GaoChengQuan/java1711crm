@@ -126,27 +126,4 @@ public class POITest {
 		style.setFont(font);
 		return style;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -156,6 +156,10 @@
 				}
 			})
 		}
+		
+		function doExportExcel() {
+			window.location.href = "${ctx}/saleChance/exportExcel.action";
+		}
 	</script>
 </head>
 <body>
@@ -166,6 +170,7 @@
 		<a href="javascript:openAddDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-add'">添加</a>
 		<a href="javascript:openUpdateDialog()" class="easyui-linkbutton" data-options="iconCls:'icon-edit'">修改</a>
 		<a href="javascript:doDelete()" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">删除</a>
+		<a href="javascript:doExportExcel()" class="easyui-linkbutton" data-options="iconCls:'icon-remove'">导出Excel</a>
 		<!-- <div>
 			用户名：<input type="text" id="s_name"/>
 			邮箱：<input type="text" id="s_email"/>

@@ -2,6 +2,9 @@ package com.situ.crm.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -72,5 +75,10 @@ public class SaleChanceController {
 	@ResponseBody
 	public ServerResponse updateDevResult(Integer saleChanceId, Integer devResult){
 		return saleChanceService.updateDevResult(saleChanceId, devResult);
+	}
+	
+	@RequestMapping("/exportExcel")
+	public void exportExcel(HttpServletResponse response) {
+		saleChanceService.exportExcel(response);
 	}
 }
