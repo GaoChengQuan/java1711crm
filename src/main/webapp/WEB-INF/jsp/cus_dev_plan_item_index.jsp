@@ -46,10 +46,12 @@
 			     {field:'planItem',title:'计划内容',width:80,align:'center',editor:{type:'validatebox',options:{required:true}}},    
 			     {field:'exeAffect',title:'执行效果',width:80,align:'center',editor:{type:'validatebox',options:{required:true}}}  
 			]],
+			//onSuccess	index,row	Fires when a row is saved successfully on the server
 			onSuccess : function() {
 				$('#datagrid').edatagrid('reload');
 				console.log("onSuccess");
 			},
+			//onDestroy	index,row	Fires when a row is destroy.
 			onDestroy : function() {
 				$('#datagrid').edatagrid('reload');
 				console.log("onDestroy");
@@ -131,11 +133,12 @@
 	 <br/>
 	 
 	<!-- 客户开发计划项table -->
+	<!-- idField="id" 删除的时候根据这个id删除 -->
 	<table id="datagrid" style="width:700px;height:250px" idField="id"></table>
 	
 	<!-- toolbar 开始 -->
 	 <div id="toolbar">
-	 	<c:if test="${param.show!='true' }">
+	 	<c:if test="${param.show == 'true' }">
 		 	<a href="javascript:$('#datagrid').edatagrid('addRow')" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加计划</a>
 		 	<a href="javascript:$('#datagrid').edatagrid('destroyRow')" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除计划</a>
 		 	<a href="javascript:$('#datagrid').edatagrid('cancelRow')" class="easyui-linkbutton" iconCls="icon-undo" plain="true">撤销行</a>
