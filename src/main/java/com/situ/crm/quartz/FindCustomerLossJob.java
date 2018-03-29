@@ -18,7 +18,7 @@ public class FindCustomerLossJob {
 	
 	//每天凌晨两点
 	//@Scheduled(cron="0 0 2 * *")
-	@Scheduled(cron="0/30 * * * *")//每隔30秒触发
+	@Scheduled(cron="0/30 * * * * ?")//每隔30秒触发
 	public void work() {
 		customerLossService.checkCustomerLoss();
 	}

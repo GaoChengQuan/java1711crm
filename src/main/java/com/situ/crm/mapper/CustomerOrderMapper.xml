@@ -105,4 +105,12 @@
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findLastOrderByCustomerId" parameterType="int" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from customer_order
+	WHERE customer_id=29
+	ORDER BY order_date DESC LIMIT 0,1;
+  </select>
 </mapper>
