@@ -17,10 +17,8 @@ import com.situ.crm.service.ICustomerLossService;
 public class CustomerLossServiceImpl implements ICustomerLossService{
 	@Autowired
 	private CustomerMapper customerMapper;
-	
 	@Autowired
 	private CustomerOrderMapper customerOrderMapper;
-	
 	@Autowired
 	private CustomerLossMapper customerLossMapper;
 
@@ -50,5 +48,4 @@ public class CustomerLossServiceImpl implements ICustomerLossService{
 			customerMapper.updateByPrimaryKeySelective(customer);
 		}
 	}
-
 }

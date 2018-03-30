@@ -300,15 +300,15 @@
     from customer 
   </select>
   
-   <select id="findCustomerLoss" resultMap="BaseResultMap">
-   SELECT 
-    <include refid="Base_Column_List" />
-	FROM customer AS c
-	WHERE id NOT IN
-	(SELECT customer_id
-	FROM customer_order
-	WHERE DATE_ADD(order_date, INTERVAL 6 MONTH) > NOW())
-	AND c.status=0;
-   </select>
+	<select id="findCustomerLoss" resultMap="BaseResultMap">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM customer AS c
+		WHERE id NOT IN
+		(SELECT customer_id
+		FROM customer_order
+		WHERE DATE_ADD(order_date, INTERVAL 6 MONTH) > NOW())
+		AND c.status=0;
+	</select>
   
 </mapper>
