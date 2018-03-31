@@ -2,6 +2,8 @@ package com.situ.crm.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,5 +53,22 @@ public class UserController {
 	@ResponseBody
 	public List<User> selectCustomerManagerList() {
 		return userService.selectCustomerManagerList();
+	}
+	
+	@RequestMapping("/selectRoleIdByUserId")
+	@ResponseBody
+	public List<Long> selectRoleIdByUserId(Long userId) {
+		return userService.selectRoleIdByUserId(userId);
+	}
+	
+	@RequestMapping("/login")
+	@ResponseBody
+	public ServerResponse login(String name, String password, HttpServletRequest request) {
+		return userService.login(name, password, request);
+	}
+	
+	@RequestMapping("/getLoginPage")
+	public String getLoginPage() {
+		return "login";
 	}
 }

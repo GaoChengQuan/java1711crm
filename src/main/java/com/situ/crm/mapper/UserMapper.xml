@@ -3,28 +3,30 @@
 <mapper namespace="com.situ.crm.mapper.UserMapper" >
   <resultMap id="BaseResultMap" type="com.situ.crm.entity.User" >
     <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
       <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="true_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="email" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="phone" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="role_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="admin" jdbcType="BIT" javaType="java.lang.Boolean"/>
     </constructor>
   </resultMap>
   
   <resultMap id="ResultMap" type="com.situ.crm.entity.User" >
-      <id column="id" property="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <id column="id" property="id" jdbcType="BIGINT" javaType="java.lang.Long" />
       <result column="name" property="name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <result column="password" property="password" jdbcType="VARCHAR" javaType="java.lang.String" />
       <result column="true_name" property="trueName" jdbcType="VARCHAR" javaType="java.lang.String" />
       <result column="email" property="email" jdbcType="VARCHAR" javaType="java.lang.String" />
       <result column="phone" property="phone" jdbcType="VARCHAR" javaType="java.lang.String" />
       <result column="role_name" property="roleName" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <result column="admin" property="admin" jdbcType="BIT" javaType="java.lang.Boolean"/>
   </resultMap>
   
   <sql id="Base_Column_List" >
-    id, name, password, true_name, email, phone, role_name
+    id, name, password, true_name, email, phone, role_name, admin
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -159,4 +161,16 @@
     where role_name='客户经理'
   </select>
   
+  <select id="selectRoleIdByUserId" resultType="long" parameterType="long">
+  	select role_id
+  	from user_role
+  	where user_id=#{userId}
+  </select>
+  
+   <select id="login" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where name=#{name} and password=#{password}
+  </select>
 </mapper>

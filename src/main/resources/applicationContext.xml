@@ -21,6 +21,8 @@ http://www.springframework.org/schema/task http://www.springframework.org/schema
     <!-- 配置Service扫描 -->
     <context:component-scan base-package="com.situ.crm.service" />
     
+    <context:component-scan base-package="com.situ.crm.util" />
+    
     <!-- 扫描定时任务包 -->
     <context:component-scan base-package="com.situ.crm.quartz" />
     <!-- 加载定时任务 -->

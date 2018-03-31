@@ -2,6 +2,8 @@ package com.situ.crm.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.situ.crm.common.DataGrideResult;
 import com.situ.crm.common.ServerResponse;
 import com.situ.crm.entity.User;
@@ -24,5 +26,9 @@ public interface IUserService {
 	ServerResponse update(User user);
 
 	List<User> selectCustomerManagerList();
+	
+	List<Long> selectRoleIdByUserId(Long userId);
+
+	ServerResponse login(String name, String password, HttpServletRequest request);
 
 }

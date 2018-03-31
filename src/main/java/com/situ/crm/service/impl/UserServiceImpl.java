@@ -2,6 +2,8 @@ package com.situ.crm.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +11,23 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.situ.crm.common.DataGrideResult;
 import com.situ.crm.common.ServerResponse;
+import com.situ.crm.entity.Permission;
+import com.situ.crm.entity.Role;
 import com.situ.crm.entity.User;
+import com.situ.crm.entity.UserRole;
+import com.situ.crm.mapper.PermissionMapper;
 import com.situ.crm.mapper.UserMapper;
+import com.situ.crm.mapper.UserRoleMapper;
 import com.situ.crm.service.IUserService;
+import com.situ.crm.util.UserContext;
 @Service
 public class UserServiceImpl implements IUserService{
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private UserRoleMapper userRoleMapper;
+	@Autowired
+	private PermissionMapper permissionMapper;
 	
 	@Override
 	public DataGrideResult<User> pageList(Integer page, Integer rows, User user) {
@@ -48,6 +60,16 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public ServerResponse add(User user) {
 		int count = userMapper.insert(user);
+		List<Role> roles = user.getRoles();
+		//员工有角色时候，保存user_role关系到表中
+		if (roles != null && roles.size() > 0) {
+			for (Role role : roles) {
+				UserRole userRole = new UserRole();
+				userRole.setRoleId(role.getId());
+				userRole.setUserId(user.getId());
+				userRoleMapper.insert(userRole);
+			}
+		}
 		if (count > 0) {
 			return ServerResponse.createSUCCESS("添加成功");
 		}
@@ -56,11 +78,48 @@ public class UserServiceImpl implements IUserService{
 	
 	@Override
 	public ServerResponse update(User user) {
+		// 删除原来的角色
+		userRoleMapper.deleteByUserId(user.getId());
+		
+		List<Role> roles = user.getRoles();
+		//员工有角色时候，保存user_role关系到表中
+		if (roles != null && roles.size() > 0) {
+			for (Role role : roles) {
+				UserRole userRole = new UserRole();
+				userRole.setRoleId(role.getId());
+				userRole.setUserId(user.getId());
+				userRoleMapper.insert(userRole);
+			}
+		}
+		
 		int count = userMapper.updateByPrimaryKey(user);
 		if (count > 0) {
 			return ServerResponse.createSUCCESS("更新成功");
 		}
 		return ServerResponse.createERROR("更新失败");
+	}
+
+	@Override
+	public List<Long> selectRoleIdByUserId(Long userId) {
+		List<Long> list = userMapper.selectRoleIdByUserId(userId);
+		return list;
+	}
+
+	@Override
+	public ServerResponse login(String name, String password, HttpServletRequest request) {
+		// 设置请求到当前的线程中
+        //UserContext.setLocalThread(request);
+		UserContext.session = request.getSession();
+		User user = userMapper.login(name, password);
+		if (user != null) {
+			// 把当前用户放到session中
+            request.getSession().setAttribute(UserContext.USER_IN_SESSION, user);
+            // 查询该用户拥有的权限,并放到session中
+            List<Permission> permissions = permissionMapper.selectByUserId(user.getId());
+            request.getSession().setAttribute(UserContext.PERMISSION_IN_SESSION, permissions);
+            return ServerResponse.createSUCCESS("登录成功");
+		}
+		return ServerResponse.createERROR("登录失败");
 	}
 
 	@Override
